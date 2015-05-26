@@ -32,10 +32,21 @@ for row in cursor:
     text_file.write("  * Server: %s\n" % row.server)
     text_file.write("  * Instance Name: %s\n" % row.name)
     text_file.write("  * Webroot: %s\n" % row.webroot)
-    text_file.write("  * Bindings: %s\n" % row.bindings)
+    #text_file.write("  * Bindings: %s\n" % row.bindings)
     text_file.write("  * Application Pools: %s\n" % row.apppool)
     text_file.write("  * Site ID: %s\n" % row.siteid)
-    text_file.write("  * State as of %s: %s\n" % (row.datechanged, row.state))
+    text_file.write("  * State: %s <sub>(state last updated %s)</sub>\n" % ((row.state=="Started" and "<hi #22b14c>" or "<hi #ed1c24>") + row.state + "</hi>", row.datechanged))
+
+    text_file.write("  * Bindings:\n")
+    for binding in row.bindings.split('|'):
+      if len(binding.split(':')) > 2:
+        if binding.split(':')[2] != "":
+          text_file.write("    * %s:%s %s\n" % (binding.split(':')[0],binding.split(':')[1],(binding.split(':')[1]=="443" and "https://" or "http://") + binding.split(':')[2]))
+        else:
+          text_file.write("    * %s\n" % binding)
+      else:
+        text_file.write("    * %s\n" % binding)
+
     text_file.close()
   
   #GENERATE PAGE WITH DOKUWIKI PHP CLI
