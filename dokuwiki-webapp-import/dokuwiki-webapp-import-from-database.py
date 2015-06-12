@@ -37,10 +37,10 @@ for row in cursor:
   with open(tmpTextFile, 'a') as text_file:
     text_file.write("====%s====\n" % row.name) 
     text_file.write("  * Server: %s\n" % row.server)
-    text_file.write("  * Instance Name: %s\n" % row.name)
-    text_file.write("  * Webroot: %s\n" % row.webroot)
+    text_file.write("  * Instance Name: <nowiki>%s</nowiki>\n" % row.name)
+    text_file.write("  * Webroot: <nowiki>%s</nowiki>\n" % row.webroot)
     #text_file.write("  * Bindings: %s\n" % row.bindings)
-    text_file.write("  * Application Pools: %s\n" % row.apppool)
+    text_file.write("  * Application Pools: <nowiki>%s</nowiki>\n" % row.apppool)
     text_file.write("  * Site ID: %s\n" % row.siteid)
     text_file.write("  * State: %s <sub>(state last updated %s)</sub>\n" % ((row.state=="Started" and "<hi #22b14c>" or "<hi #ed1c24>") + row.state + "</hi>", row.datechanged))
 
